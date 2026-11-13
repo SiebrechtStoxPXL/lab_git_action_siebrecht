@@ -13,4 +13,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7.0.1
       - name: list all
-        run: ls- alhR
+        run: ls -alhR
