@@ -18,20 +18,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "26.x"
+          
       - name: Install dependencies
         run: npm install
+        
       - name: Build app
         run: npm run build --if-present
 
       - name: Bundle app and node_modules into ZIP
         run: zip -r app.zip . -x ".git/*" ".github/*" "app.zip"
+        
       - name: tests
         run: npm test -- --coverage --testLocationInResults
+        
       - name: Publish test and coverage report
         uses: mridang/action-test-reporter@v1
         with:
           name: Unit tests
-          results-path: ./.out/junit.xml
-          coverage-path: coverage/lcov.info
+          working-directory: ./
+          coverage-file: coverage/lcov.info
+          
       - name: list all
         run: ls -alhR
