@@ -27,5 +27,7 @@ jobs:
         run: zip -r app.zip . -x ".git/*" ".github/*" "app.zip"
       - name: test
         run: npm test
+      - name: Better Test Reports Action
+        uses: mridang/action-test-reporter@v3.0.0
       - name: list all
         run: ls -alhR
