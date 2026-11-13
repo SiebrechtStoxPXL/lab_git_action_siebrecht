@@ -25,11 +25,13 @@ jobs:
 
       - name: Bundle app and node_modules into ZIP
         run: zip -r app.zip . -x ".git/*" ".github/*" "app.zip"
-      - name: test
-        run: npm test
-      - name: Better Test Reports Action
-        uses: mridang/action-test-reporter@v3.0.0
+      - name: tests
+        run: npm test -- --coverage --testLocationInResults
+      - name: Publish test and coverage report
+        uses: mridang/action-test-reporter@v1
         with:
-          results-path: test-results.xml
+          name: Unit tests
+          results-path: ./.out/junit.xml
+          coverage-path: coverage/lcov.info
       - name: list all
         run: ls -alhR
